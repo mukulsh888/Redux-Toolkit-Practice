@@ -1,0 +1,54 @@
+Redux-Toolkit steps to use it.
+
+step1: create store.js 
+and import configureStore
+
+step2:now make your Reducers
+in redux-toolkit => we make it slicers 
+make a filename => import createSlice from reduxjs/toolkit
+
+step3: also import nanoid which generates unique ids.
+
+step4:initialState bna lo which can be array or can be an object.
+
+step5: ab createSlice use krke slice bnatay hai 
+
+step6: isme hum ek name dete hai initialState fir reducer functions inside reducers:{ 
+addTodo:(state,action)=>{},}
+hmesha 2 arguments lete hai ek state or ek action.
+
+step7: state ke andar mitla hai current state or action ke andar jo bhi data pass ho rha hai
+
+export const TodoSlice = createSlice({
+    name: "todo",
+    initialState,
+    reducers: {
+        addTodo: (state, action) => {
+            const todo = {
+                id: nanoid(),
+                text: action.payload,
+            }
+            state.todos.push(todo)
+        },
+        removeTodo: (state, action) => {
+            state.todos = state.todos.filter((todo) => todo.id !== action.payload)
+        }
+    }
+})
+
+step 8 : export krte hai functionalities ko export const {addTodo,removeTodo} = todoSlice actions.
+
+step 9 : export kro export default todoSlice.reducer
+saray reducer export krdo taki store tk poch jaye sbhi.
+
+step 10: add todo mtlb store ke andar kuch jayega vo hoga useDispatch se.
+
+dispatch ek reducer ko use krte huay store ke andar changes krta hai.
+
+dispatch reducer ko use krte huay store ke andar value change krta hai.
+
+dispatch(addTodo(input))
+
+addTodo ek reducer function hai jo ki dispatch ki help se store m value change krega input variable hai jo ki as an argument pass kiya hai.
+
+step11:main.jsx m jakar import krlo provider or store pass krdo as an object. with value store.
